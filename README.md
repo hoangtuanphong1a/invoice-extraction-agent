@@ -77,25 +77,30 @@ docker compose up --build
 
 ---
 
-### Cách 2: Chạy trực tiếp trên máy (Local Dev)
+### Cách 2: Chạy trực tiếp trên máy bằng Virtual Environment (`venv`)
 
-#### 1. Backend (FastAPI + Python 3.10+)
+#### 1. Backend (FastAPI + Python trong `venv` cô lập)
 
+**Cách nhanh (Windows 1-click):**
+- Bấm đúp chuột chạy file: [`backend/run_backend.bat`](backend/run_backend.bat) (tự động kích hoạt venv và chạy server).
+- Hoặc chạy test: [`backend/run_test.bat`](backend/run_test.bat).
+
+**Hoặc chạy thủ công qua dòng lệnh:**
 ```bash
 cd backend
-python -m pip install -r requirements.txt
 
-# Sinh 20 hóa đơn PDF mẫu
-python scripts/generate_sample_invoices.py
+# Kích hoạt môi trường ảo venv đã được tạo sẵn
+.\venv\Scripts\activate
 
 # Khởi chạy server FastAPI
 python -m uvicorn app.main:app --reload --port 8000
 ```
 
-#### 2. Chạy bộ kiểm thử tự động (Pytest)
+#### 2. Chạy bộ kiểm thử tự động (Pytest trong `venv`)
 
 ```bash
-python -m pytest backend/tests -v
+cd backend
+.\venv\Scripts\python.exe -m pytest tests -v
 ```
 *Kết quả: 24/24 tests passed.*
 
